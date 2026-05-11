@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이지원 자산관리 파트너 | 프리미엄 보장분석</title>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* 기본 프리셋 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #0c1017;
+            color: #ffffff;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* 공통 컨테이너 */
+        .container {
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* 럭셔리 골드/블루 네비게이션 */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(12, 16, 23, 0.85);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            z-index: 1000;
+            padding: 18px 0;
+        }
+        .header-wrap {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 1rem;
+            letter-spacing: 3px;
+            font-weight: 700;
+            color: #5fa4cc;
+            text-transform: uppercase;
+        }
+        .header-btn {
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.75rem;
+            font-weight: 700;
+            border: 1px solid #4A8BB2;
+            padding: 8px 16px;
+            border-radius: 8px;
+            background: rgba(74, 139, 178, 0.1);
+            transition: all 0.3s ease;
+        }
+        .header-btn:hover {
+            background: #4A8BB2;
+            box-shadow: 0 4px 15px rgba(74, 139, 178, 0.4);
+        }
+
+        /* 1. 히어로 섹션 */
+        .hero {
+            position: relative;
+            height: 100vh;
+            min-height: 650px;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+        .hero-bg {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: url('보험.jpg') no-repeat center center;
+            background-size: cover;
+            z-index: 1;
+        }
+        .hero-overlay {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(to right, 
+                rgba(12, 16, 23, 0.95) 0%, 
+                rgba(12, 16, 23, 0.8) 40%, 
+                rgba(12, 16, 23, 0.4) 70%, 
+                rgba(12, 16, 23, 0.85) 100%),
+                linear-gradient(to bottom, rgba(12, 16, 23, 0.3) 0%, rgba(12, 16, 23, 0.9) 100%);
+            z-index: 2;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            max-width: 600px;
+            padding-top: 60px;
+        }
+        .tagline {
+            font-size: 0.9rem;
+            color: #5fa4cc;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 24px;
+            letter-spacing: -1px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+        .hero h1 span {
+            color: #5fa4cc;
+        }
+        .hero p {
+            font-size: 1.05rem;
+            color: #cbd5e1;
+            margin-bottom: 35px;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+        .hero-cta {
+            display: inline-block;
+            background: #4A8BB2;
+            color: #fff;
+            text-decoration: none;
+            padding: 16px 36px;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            box-shadow: 0 8px 25px rgba(74, 139, 178, 0.35);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .hero-cta:hover {
+            background: #3b7396;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(74, 139, 178, 0.5);
+        }
+
+        /* 섹션 공통 헤더 */
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        .section-header .sub {
+            font-size: 0.85rem;
+            color: #5fa4cc;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            display: block;
+        }
+        .section-header h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        /* 2. 서비스 소개 섹션 */
+        .services {
+            padding: 100px 0;
+            background-color: #0f141c;
+        }
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        .service-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 24px;
+            padding: 40px 30px;
+            transition: all 0.3s ease;
+        }
+        .service-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(95, 164, 204, 0.3);
+            background: rgba(255, 255, 255, 0.04);
+        }
+        .icon-circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            background: rgba(74, 139, 178, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            color: #5fa4cc;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+        .service-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+        .service-card p {
+            font-size: 0.88rem;
+            color: #94a3b8;
+            line-height: 1.6;
+        }
+
+        /* 3. 실제 절감 사례 섹션 */
+        .cases {
+            padding: 100px 0;
+            background-color: #0c1017;
+        }
+        .case-box {
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: 30px;
+            padding: 45px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+        }
+        .case-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        .case-table th {
+            text-align: left;
+            padding: 18px;
+            font-size: 0.85rem;
+            color: #94a3b8;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            font-weight: 500;
+        }
+        .case-table td {
+            padding: 24px 18px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            font-size: 0.95rem;
+        }
+        .case-table tr:last-child td {
+            border-bottom: none;
+        }
+        .badge {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            color: #cbd5e1;
+        }
+        .saving {
+            color: #f43f5e;
+            font-weight: 700;
+        }
+        .highlight-text {
+            color: #5fa4cc;
+            font-weight: 500;
+        }
+
+        /* 4. 상담 신청 섹션 */
+        .cta-section {
+            position: relative;
+            padding: 120px 0;
+            overflow: hidden;
+        }
+        .cta-bg {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: url('보험2.jpg') no-repeat center center;
+            background-size: cover;
+            z-index: 1;
+        }
+        .cta-overlay {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(to top, rgba(12, 16, 23, 0.98) 0%, rgba(12, 16, 23, 0.85) 100%);
+            z-index: 2;
+        }
+        .cta-content {
+            position: relative;
+            z-index: 3;
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .cta-content h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+        .cta-content p {
+            font-size: 1.05rem;
+            color: #cbd5e1;
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        /* 미팅신청 프리미엄 폼 */
+        .consult-form {
+            background: rgba(15, 20, 28, 0.75);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 40px;
+            text-align: left;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+        }
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .form-group.full {
+            grid-column: span 2;
+        }
+        .form-group label {
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #94a3b8;
+            letter-spacing: 1px;
+        }
+        
+        /* ⭐️ [중요] 드롭바 하얀색 오류 해결을 위한 CSS 속성 지정 ⭐️ */
+        .form-group input, .form-group select {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 14px;
+            border-radius: 10px;
+            color: #fff;
+            font-size: 0.9rem;
+            outline: none;
+            transition: all 0.3s;
+        }
+        .form-group input:focus, .form-group select:focus {
+            border-color: #5fa4cc;
+            background: rgba(255,255,255,0.08);
+        }
+        
+        /* ⭐️ 모바일 및 PC 브라우저에서 드롭바 옵션 목록 배경을 강제로 어둡게 지정 ⭐️ */
+        .form-group select option {
+            background-color: #151b26 !important; /* 어두운 남색 배경 */
+            color: #ffffff !important;            /* 하얀색 글씨 */
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: #4A8BB2;
+            border: none;
+            color: #fff;
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(74, 139, 178, 0.3);
+        }
+        .submit-btn:hover {
+            background: #3b7396;
+            transform: translateY(-2px);
+        }
+
+        /* 푸터 영역 */
+        footer {
+            background-color: #080b10;
+            padding: 50px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 0.8rem;
+            color: #64748b;
+        }
+        .footer-wrap {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .footer-left p {
+            margin-bottom: 6px;
+        }
+
+        /* 반응형 모바일 */
+        @media (max-width: 850px) {
+            .grid-3 {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            .form-group.full {
+                grid-column: span 1;
+            }
+            .case-table th:nth-child(3),
+            .case-table td:nth-child(3) {
+                display: none;
+            }
+        }
+        @media (max-width: 600px) {
+            .hero {
+                text-align: center;
+            }
+            .hero-content {
+                margin: 0 auto;
+            }
+            .footer-wrap {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container header-wrap">
+            <div class="logo">Premium Financial</div>
+            <a href="#consult" class="header-btn">실시간 상담 신청</a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-overlay"></div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="tagline">PROMISE & TRUST</div>
+                <h1>매달 내는 보험료,<br>정작 필요할 땐 <span>안전할까요?</span></h1>
+                <p>지인 부탁으로 가입했던 보험, 알지도 못하는 중복 보장으로 새는 돈을 꼼꼼하게 막아드립니다. 신뢰받는 1:1 파트너 이지원이 보장을 새롭게 리모델링해 드립니다.</p>
+                <a href="#consult" class="hero-cta">3분 내 보험 진단 신청하기</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="services">
+        <div class="container">
+            <div class="section-header">
+                <span class="sub">3 STEP SOLUTION</span>
+                <h2>안전하고 든든한 보험 구조대</h2>
+            </div>
+            <div class="grid-3">
+                <div class="service-card">
+                    <div class="icon-circle">01</div>
+                    <h3>중복 보장 다이어트</h3>
+                    <p>동일한 실손 의료비나 중복된 정액형 특약을 제거하여 매달 불필요하게 낭비되는 지출을 확실하게 축소해 드립니다.</p>
+                </div>
+                <div class="service-card">
+                    <div class="icon-circle">02</div>
+                    <h3>보장 구멍 메우기</h3>
+                    <p>우리나라 사망률 1~3위인 암, 뇌혈관, 심장질환 진단비와 필수 수술비가 제대로 채워져 있는지 꼼꼼하게 확인합니다.</p>
+                </div>
+                <div class="service-card">
+                    <div class="icon-circle">03</div>
+                    <h3>가성비 맞춤 리모델링</h3>
+                    <p>기존의 훌륭한 담보 조건은 완벽하게 살리고, 시대에 맞는 설계를 합리적으로 재배치하여 유지력을 강화합니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cases">
+        <div class="container">
+            <div class="section-header">
+                <span class="sub">ACTUAL CASE STUDY</span>
+                <h2>이지원을 만난 고객들의 놀라운 변화</h2>
+            </div>
+            <div class="case-box">
+                <table class="case-table">
+                    <thead>
+                        <tr>
+                            <th>고객 조건</th>
+                            <th>기존 상태</th>
+                            <th>리모델링 내역</th>
+                            <th>결과</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="badge">30대 직장인 K씨</span></td>
+                            <td>종신 보험 위주 세팅 (월 18만원)</td>
+                            <td>중복 정액형 특약 정리 및 실비 집중</td>
+                            <td>월 <span class="saving">11만 원으로 감소</span> (보장 유지)</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge">40대 가장 J씨</span></td>
+                            <td>월 25만원 지출 (뇌/심장 보장 누락)</td>
+                            <td>가성비 3대 진단비 세팅 및 수술비 추가</td>
+                            <td>월 19만 원으로 <span class="highlight-text">핵심 질병 빈틈 제거</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge">50대 주부 L씨</span></td>
+                            <td>오래된 갱신형 보험 폭탄 (월 32만원)</td>
+                            <td>무해지 환급형 비갱신형으로 리모델링</td>
+                            <td>노후까지 <span class="highlight-text">인상 없는 평생 보장 완성</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section" id="consult">
+        <div class="cta-bg"></div>
+        <div class="cta-overlay"></div>
+        <div class="container" style="position: relative; z-index: 3;">
+            <div class="cta-content">
+                <h2>차 한 잔 마시듯 편안한 자산 진단</h2>
+                <p>복잡하고 딱딱한 보험 이야기는 끝내세요. 고객님의 생활 패턴과 인생 계획에 맞게 가장 쉽고 투명하게 안내해 드립니다.</p>
+                
+                <form class="consult-form" onsubmit="sendData(event)">
+                    <div class="form-grid">
+                        
+                        <div class="form-group">
+                            <label for="userName">성함</label>
+                            <input type="text" id="userName" placeholder="예: 홍길동" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="userPhone">연락처</label>
+                            <input type="tel" id="userPhone" placeholder="예: 010-1234-5678" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="genderAge">성별과 연령대</label>
+                            <select id="genderAge" required>
+                                <option value="">선택해 주세요</option>
+                                <option value="남성 (20대 이하)">남성 (20대 이하)</option>
+                                <option value="남성 (30대)">남성 (30대)</option>
+                                <option value="남성 (40대)">남성 (40대)</option>
+                                <option value="남성 (50대 이상)">남성 (50대 이상)</option>
+                                <option value="여성 (20대 이하)">여성 (20대 이하)</option>
+                                <option value="여성 (30대)">여성 (30대)</option>
+                                <option value="여성 (40대)">여성 (40대)</option>
+                                <option value="여성 (50대 이상)">여성 (50대 이상)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="callTime">연락 가능한 시간대</label>
+                            <select id="callTime" required>
+                                <option value="">선택해 주세요</option>
+                                <option value="오전 (09:00 ~ 12:00)">오전 (09:00 ~ 12:00)</option>
+                                <option value="오후 (12:00 ~ 18:00)">오후 (12:00 ~ 18:00)</option>
+                                <option value="저녁 (18:00 ~ 21:00)">저녁 (18:00 ~ 21:00)</option>
+                                <option value="상관없음 / 편할 때 언제나">상관없음 / 편할 때 언제나</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group full">
+                            <label for="interest">가장 고민되는 부분 (궁금한 점)</label>
+                            <select id="interest" required>
+                                <option value="">선택해 주세요</option>
+                                <option value="불필요한 보험료 줄이기">불필요한 보험료 줄이기</option>
+                                <option value="부족한 암/뇌/심장 보장 채우기">부족한 암/뇌/심장 보장 채우기</option>
+                                <option value="기존 가입 보험 전체 진단 및 분석">기존 가입 보험 전체 진단 및 분석</option>
+                                <option value="기타 맞춤 자산 관리 문의">기타 맞춤 자산 관리 문의</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="submit-btn" id="submitBtn">📊 내 맞춤 보장 무료 진단서 신청하기</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-wrap">
+            <div class="footer-left">
+                <p><strong>이지원 자산관리 파트너 (Premium Financial)</strong></p>
+                <p>연락처: 010-1234-5678 &nbsp;|&nbsp; 이메일: jw_lee_ins@naver.com</p>
+                <p>© 2026 Premium Financial. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function sendData(event) {
+            event.preventDefault();
+
+            // 1. 입력 화면 데이터 개별 수집
+            var name = document.getElementById('userName').value.trim();
+            var phone = document.getElementById('userPhone').value.trim();
+            var genderAge = document.getElementById('genderAge').value;
+            var callTime = document.getElementById('callTime').value;
+            var interest = document.getElementById('interest').value;
+            
+            // 더블 클릭 중복 제출 방지
+            var submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = true;
+            submitBtn.innerText = "진단서 작성 및 전송 중...";
+
+            // 2. 새로운 구글 웹앱 URL 적용
+            var googleAppUrl = "https://script.google.com/macros/s/AKfycbz3DfuN5VbPx7B4HMR8z48DZDssTQzFKm2v5NucKvkvX39dX5SexWOVd_M_0bDoblvaEQ/exec"; 
+
+            // 3. 구글 앱스 스크립트 코드의 col1~col4 와 매핑
+            var searchParams = new URLSearchParams();
+            searchParams.append("col1", genderAge);
+            searchParams.append("col2", name + " (" + phone + ")");
+            searchParams.append("col3", callTime);
+            searchParams.append("col4", interest);
+
+            // 4. 전송 시작
+            fetch(googleAppUrl, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                body: searchParams.toString()
+            })
+            .then(response => response.json())
+            .then(data => {
+                if(data.result === "success") {
+                    alert("성공적으로 신청되었습니다! 이지원 자산관리 파트너가 꼼꼼히 분석하여 연락드리겠습니다. 👍");
+                    
+                    // 폼 입력 필드 초기화
+                    document.getElementById('userName').value = "";
+                    document.getElementById('userPhone').value = "";
+                    document.getElementById('genderAge').selectedIndex = 0;
+                    document.getElementById('callTime').selectedIndex = 0;
+                    document.getElementById('interest').selectedIndex = 0;
+                } else {
+                    alert("전송 중 오류가 발생했습니다: " + (data.error || "결과 반환 실패"));
+                }
+            })
+            .catch(error => {
+                console.error("전송 에러:", error);
+                alert("연결 중 문제가 발생했습니다. 스프레드시트 배포 환경(권한 및 새버전 저장 여부)을 다시 한번 확인해 주세요.");
+            })
+            .finally(() => {
+                submitBtn.disabled = false;
+                submitBtn.innerText = "📊 내 맞춤 보장 무료 진단서 신청하기";
+            });
+        }
+    </script>
+</body>
+</html>
